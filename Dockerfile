@@ -1,26 +1,23 @@
 # Base image -> https://github.com/runpod/containers/blob/main/official-templates/base/Dockerfile
 # DockerHub -> https://hub.docker.com/r/runpod/base/tags
-FROM runpod/base:0.4.0-cuda11.8.0
+FROM runpod/pytorch:3.10-2.0.0-117
 
-# The base image comes with many system dependencies pre-installed to help you get started quickly.
-# Please refer to the base image's Dockerfile for more information before adding additional dependencies.
-# IMPORTANT: The base image overrides the default huggingface cache location.
+SHELL ["/bin/bash", "-c"]
 
+WORKDIR /workspace
 
-# --- Optional: System dependencies ---
-# COPY builder/setup.sh /setup.sh
-# RUN /bin/bash /setup.sh && \
-#     rm /setup.sh
+# Install missing dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends apt-utils zstd python3.10-venv git-lfs unzip && \
+    apt clean && rm -rf /var/lib/apt/lists/* && \
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 
-
-# Python dependencies
+# Install Python dependencies
 COPY builder/requirements.txt /requirements.txt
-RUN python -m pip install --upgrade pip && \
-    python -m pip install --upgrade -r /requirements.txt --no-cache-dir && \
+RUN pip install --upgrade pip && \
+    pip install -r /requirements.txt && \
     rm /requirements.txt
-
-# NOTE: The base image comes with multiple Python versions pre-installed.
-#       It is reccommended to specify the version of Python when running your code.
 
 
 # Add src files (Worker Template)
