@@ -1,4 +1,3 @@
-""" Example handler file. """
 
 import runpod
 from volume_folder_check import check_volume_folder_existence
@@ -12,14 +11,21 @@ def handler(job):
 
 
     job_input = job['input']
+    output = {}
     volume_check = check_volume_folder_existence(job)
     if not volume_check[0]:
         return {"error": volume_check[-1]}
+    else:
+        output["return message"] = volume_check[-1]
 
 
+    
     name = job_input.get('name', 'World')
+    output["name"] = name
 
-    return f"Hello, {name}!"
+    
+
+    return output
 
 
 runpod.serverless.start({"handler": handler})
