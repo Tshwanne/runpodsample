@@ -1,5 +1,3 @@
-# Base image -> https://github.com/runpod/containers/blob/main/official-templates/base/Dockerfile
-# DockerHub -> https://hub.docker.com/r/runpod/base/tags
 FROM runpod/base:0.6.2-cpu
 
 SHELL ["/bin/bash", "-c"]
