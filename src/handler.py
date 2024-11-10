@@ -18,13 +18,6 @@ def handler(job):
     else:
         output["return message"] = volume_check[-1]
 
-
-    
-    name = job_input.get('name', 'World')
-    output["name"] = name
-
-    
-
     return output
 
 
