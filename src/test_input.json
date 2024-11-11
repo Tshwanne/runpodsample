@@ -1,0 +1,9 @@
+{
+    "input": {"name": "takudzwa"},
+    "folder_check": {
+        "check": true,
+        "path": "C:/Users/pinkie/Documents/GitHub/runpodsample/src/volume_folder",
+        "file": "example_file.txt"
+    }
+
+}
