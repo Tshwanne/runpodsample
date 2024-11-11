@@ -2,7 +2,7 @@ import os
 
 
 
-def check_folder_existence(config):
+def check_volume_folder_existence(config):
     """
     Check if a certain folder exists based on the configuration dictionary.
     If the folder exists, list all files in the directory if list volume files is present and True in the configuration.
